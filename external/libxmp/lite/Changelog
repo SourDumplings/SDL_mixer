@@ -1,6 +1,26 @@
 Stable versions
 ---------------
 
+4.6.1 (?):
+	Changes by Alice Rowan:
+	- Add stereo sample loading support for IT, S3M, XM.
+	- Fix XM envelope sustain points that exist on a zero-length loop.
+	- Faster IT loading by buffering pattern, sample, and comment reads.
+	- Fix loop detection edge cases broken by S3M/IT marker scan bugs.
+	- Replace rand() with a built-in reentrant alternative.
+	- xmp_set_tempo_factor now returns -XMP_ERROR_STATE when called prior
+	  to xmp_start_player (instead of causing crashes).
+	- Fix mixer crashes caused by previously valid tempo factors after
+	  sample rate or BPM changes.
+	Changes by Thomas Neumann:
+	- Fix XM envelope handling
+	- Fix XM restart position, so that it is possible to play
+	 "10 Days Of Abstinence.xm"
+	Changes by ds-sloth:
+	- Optimize scan code for common case of no effects
+	Changes by Ozkan Sezer:
+	- Build system fixes and clean-ups. Misc code clean-ups.
+
 4.6.0 (20230615):
 	Changes by Alice Rowan:
 	- Implement S3M and IT mix volume.
@@ -22,9 +42,9 @@ Stable versions
 	- Fix >1MB S3M modules relying on the sample segment high byte.
 	- Move interpolation wraparound handling out of sample loader.
 	- Don't increment voice position by step value at loop/tick end.
-	- Allow xmp_smix_play functions to play key off, cut and fade events.
 	- Several loading performance improvements.
 	- Allow up to 255 sequences to be scanned.
+	- Allow xmp_smix_play functions to play key off, cut and fade events.
 	- Fixed numerous defects found by fuzzing.
 	Changes by Vitaly Novichkov:
 	- Cmake build system support.
@@ -49,7 +69,7 @@ Stable versions
 	  (no ABI change)
 	- xmp_load_module_from_memory() now accepts a const void* memory
 	  param (no ABI change)
-	- xmp_load_module_from_memory no longer accepts sizes <= 0.
+	- xmp_load_module_from_memory() no longer accepts sizes <= 0.
 	- explicitly document that callers of xmp_load_module_from_file()
 	  are responsible for closing their own file.
 	- remove nonportable use of fdopen in xmp_load_module_from_file()
@@ -153,7 +173,7 @@ Stable versions
 	- fix S3M set pan effect (reported by Hai Shalom and Johannes Schultz)
 	- code refactoring and cleanup
 
-4.3.12 (20150305):
+4.3.12 (20160305):
 	Fix bugs caught in the OpenMPT test cases:
 	- fix IT note off with instrument
 	- fix IT note recover after cut
@@ -200,8 +220,8 @@ Stable versions
 	- prevent division by zero in memory I/O
 	Other changes:
 	- fix IT envelope release + fadeout (reported by NoSuck)
-	- fix IT autovibrato depth (reported by Travis Evans)
 	- fix tone portamento target setting (reported by Georgy Lomsadze)
+	- fix IT autovibrato depth (reported by Travis Evans)
 	- disable ST3 sample size limit (reported by Jochen Goernitz)
 
 4.3.9 (20150623):
@@ -327,7 +347,7 @@ Stable versions
 	- fix module titles and instrument names in Mac OS X
 	- fix row delay initialization on new module
 
-4.3.0 (20140927):
+4.3.0 (20140926):
 	- rebranded as libxmp-lite
 	- build from the same source tree as the full libxmp
 	- fix fine volume slide memory

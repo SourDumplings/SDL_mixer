@@ -1,6 +1,6 @@
-m4_define([libxmplite_VERSION_MAJOR_m4], 4)
-m4_define([libxmplite_VERSION_MINOR_m4], 6)
-m4_define([libxmplite_VERSION_PATCH_m4], 0)
+m4_define([libxmplite_VERSION_MAJOR_m4], [4])
+m4_define([libxmplite_VERSION_MINOR_m4], [6])
+m4_define([libxmplite_VERSION_PATCH_m4], [0])
 m4_define([libxmplite_VERSION_m4], libxmplite_VERSION_MAJOR_m4[.]libxmplite_VERSION_MINOR_m4[.]libxmplite_VERSION_PATCH_m4)
 
 AC_PREREQ(2.60)
@@ -57,7 +57,7 @@ darwin*)
     CFLAGS="${CFLAGS} -fno-common"
   fi
   ;;
-cygwin* | *djgpp | mint* | amigaos* |aros* | morphos*)
+cygwin* | *djgpp | emx* | mint* | amigaos* | aros* | morphos*)
   enable_static=yes
   enable_shared=no
   ;;

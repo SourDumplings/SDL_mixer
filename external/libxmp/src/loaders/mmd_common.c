@@ -1,5 +1,5 @@
 /* Extended Module Player
- * Copyright (C) 1996-2023 Claudio Matsuoka and Hipolito Carraro Jr
+ * Copyright (C) 1996-2024 Claudio Matsuoka and Hipolito Carraro Jr
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -459,9 +459,9 @@ static void mmd_load_instrument_common(
 
 		if (instr->type & S_16) {
 			info->flg |= XMP_SAMPLE_16BIT;
+			/* Length is (bytes / channels) but the
+			 * loop is measured in sample frames. */
 			info->length >>= 1;
-			info->rep >>= 1;
-			info->replen >>= 1;
 		}
 
 		/* STEREO means that this is a stereo sample. The sample
@@ -471,10 +471,7 @@ static void mmd_load_instrument_common(
 		* usage for both samples is length * 2 bytes.
 		*/
 		if (instr->type & STEREO) {
-			D_(D_WARN "stereo sample unsupported");
-			/* TODO: implement stereo sample support.
-			info.flg |= XMP_SAMPLE_STEREO;
-			*/
+			info->flg |= XMP_SAMPLE_STEREO;
 		}
 	}
 }
