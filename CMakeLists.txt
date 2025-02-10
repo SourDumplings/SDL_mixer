@@ -73,11 +73,12 @@ endif()
 # Assume MSVC projects don't have a package manager and need vendored dependencies (by default).
 # Most other platforms have some kind of package manager.
 # FIXME: consider a package manager such as conan/vcpkg instead of vendoring
-if(ANDROID OR MSVC)
-    set(vendored_default ON)
-else()
-    set(vendored_default OFF)
-endif()
+# if(ANDROID OR MSVC)
+#     set(vendored_default ON)
+# else()
+#     set(vendored_default OFF)
+# endif()
+set(vendored_default TRUE)
 
 set(sdl3mixer_install_enableable ON)
 if((TARGET SDL3-shared OR TARGET SDL3-static) AND SDL_DISABLE_INSTALL)
